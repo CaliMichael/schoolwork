@@ -1,22 +1,31 @@
 package com.school.demo.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
-@Table(name= "EMPLOYEE")
+@Table(name= "EMPLOYEE", uniqueConstraints = @UniqueConstraint(columnNames = "EMPLOYEE_CODE"))
 @Entity
 @Data
 public class Employee {
 
     @Id
-    @Column(name = "ID")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")  // Generates a UUID
+    @Column(name = "ID", updatable = false, nullable = false)
     private UUID id;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false)
     private String name;
+
+    @Column(name = "EMPLOYEE_CODE", nullable = false)
+    private String employeeCode;
+
+    @Column(name = "EMAIL")
+    private String email;
+
+    @Column(name = "ADDRESS")
+    private String address;
 }

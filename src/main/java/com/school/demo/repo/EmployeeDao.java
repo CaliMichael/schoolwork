@@ -32,6 +32,9 @@ public class EmployeeDao {
         if (employeeOptional.isPresent()) {
             Employee employee = employeeOptional.get();
             employee.setName(employeeDetails.getName());
+            employee.setEmployeeCode(employeeDetails.getEmployeeCode());
+            employee.setEmail(employeeDetails.getEmail());
+            employee.setAddress(employeeDetails.getAddress());
             // Update other fields if necessary
             return employeeRepository.save(employee);  // Saving the updated employee
         }
